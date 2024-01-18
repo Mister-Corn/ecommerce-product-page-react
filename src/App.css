@@ -5,5 +5,11 @@
 @layer base {
   :root {
     font-family: 'Kumbh Sans Variable', sans-serif;
+
+    /* --- Colors --- */
+    --clr-sunshine-foreground: 255 126 27;
+    --clr-sunshine-background: 255 238 226;
+    --clr-text-dark: 29 32 38;
+    --clr-text-lighter: 105 112 125;
   }
 }
