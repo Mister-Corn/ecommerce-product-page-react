@@ -5,6 +5,9 @@
 @layer base {
   :root {
     font-family: 'Kumbh Sans Variable', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     /* --- Colors --- */
     --clr-sunshine-foreground: 255 126 27;
