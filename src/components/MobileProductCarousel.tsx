@@ -1,3 +1,4 @@
+import { useSwipeable } from 'react-swipeable'
 import imgProduct1 from '@/assets/products/image-product-1.jpg'
 import imgProduct2 from '@/assets/products/image-product-2.jpg'
 import imgProduct3 from '@/assets/products/image-product-3.jpg'
@@ -40,8 +41,13 @@ function MobileProductCarousel() {
     })
   }
 
+  const mobileSwipeHandlers = useSwipeable({
+    onSwipedLeft: handlePrevious,
+    onSwipedRight: handleNext,
+  })
+
   return (
-    <section className="relative">
+    <section {...mobileSwipeHandlers} className="relative">
       <img
         src={currentImg}
         alt=""
