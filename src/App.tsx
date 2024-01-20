@@ -23,7 +23,10 @@ function App() {
         </div>
 
         <div className="flex flex-row items-baseline gap-5">
-          <IconCart fill="#69707D" />
+          <button aria-label="Cart">
+            <IconCart fill="#69707D" />
+          </button>
+
           <img src={avatar} alt="Your account" className="h-6 w-6" />
         </div>
       </header>
