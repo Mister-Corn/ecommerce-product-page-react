@@ -1,24 +1,107 @@
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
-import mobileMenuIcon from './assets/svgs/icon-menu.svg'
-import logo from './assets/svgs/logo.svg'
-import cart from './assets/svgs/icon-cart.svg'
+import IconCart from './assets/components/IconCart'
 import avatar from './assets/image-avatar.png'
+import imgProduct1 from './assets/products/image-product-1.jpg'
+import mobileMenuIcon from './assets/svgs/icon-menu.svg'
+import iconMinus from './assets/svgs/icon-minus.svg'
+import iconPlus from './assets/svgs/icon-plus.svg'
+import logo from './assets/svgs/logo.svg'
 
 function App() {
   return (
     <>
-      <header className="flex flex-row items-center justify-between bg-white px-6 pb-7 pt-5">
-        <div className="flex flex-row gap-4">
-          <img src={mobileMenuIcon} alt="Menu" />
-          <img src={logo} alt="logo" />
+      <header className="flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
+        <div className="flex flex-row items-baseline gap-4">
+          <img
+            src={mobileMenuIcon}
+            alt="Menu"
+            aria-label="Mobile Menu"
+            className="h-4 w-4"
+          />
+          <img src={logo} alt="logo" aria-label="sneakers" />
         </div>
 
-        <div className="flex flex-row gap-5">
-          <img src={cart} alt="Your cart" />
+        <div className="flex flex-row items-baseline gap-5">
+          <IconCart fill="#69707D" />
           <img src={avatar} alt="Your account" className="h-6 w-6" />
         </div>
       </header>
+
+      <main>
+        <section>
+          <img
+            src={imgProduct1}
+            alt=""
+            className="aspect-[4/3] w-full object-cover"
+          />
+        </section>
+
+        <section className="p-6">
+          <p className="mb-6 text-xs font-bold tracking-[0.115375em] text-sunshine-fg">
+            SNEAKER COMPANY
+          </p>
+
+          <h1 className="mb-4 text-3xl font-bold text-black-darker">
+            Fall Limited Edition Sneakers
+          </h1>
+
+          <p className="mb-6 text-black-lighter">
+            These low-profile sneakers are your perfect casual wear companion.
+            Featuring a durable rubber outer sole, they’ll withstand everything
+            the weather can offer.
+          </p>
+
+          <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-row items-center gap-4">
+              <span className="inline-block text-[28px] font-bold text-black-darker">
+                $125.00
+              </span>
+              <div className="inline-block rounded-[6px] bg-sunshine-bg">
+                <span
+                  aria-label="50% discount"
+                  className="px-2 py-1 font-bold text-sunshine-fg"
+                >
+                  50%
+                </span>
+              </div>
+            </div>
+
+            <span
+              aria-label="Original price"
+              className="font-bold text-[#B6BCC8] line-through"
+            >
+              $250.00
+            </span>
+          </div>
+
+          <div className="mb-4 mt-6 flex w-full flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5">
+            <button
+              aria-label="Decrement quantity"
+              className="pl-6 text-sunshine-fg"
+            >
+              <img src={iconMinus} alt="-" />
+            </button>
+            <span
+              className="font-bold"
+              aria-label="Current quantity to add to cart"
+            >
+              0
+            </span>
+            <button
+              aria-label="Increment quantity"
+              className="pr-6 text-sunshine-fg"
+            >
+              <img src={iconPlus} alt="+" />
+            </button>
+          </div>
+
+          <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
+            <IconCart fill="white" />
+            Add to cart
+          </button>
+        </section>
+      </main>
     </>
   )
 }
