@@ -57,10 +57,10 @@ function App() {
               <span className="inline-block text-[28px] font-bold text-black-darker">
                 $125.00
               </span>
-              <div className="inline-block rounded-[6px] bg-sunshine-bg">
+              <div className="inline-block rounded-[6px] bg-sunshine-bg px-3 py-1">
                 <span
                   aria-label="50% discount"
-                  className="px-2 py-1 font-bold text-sunshine-fg"
+                  className="font-bold text-sunshine-fg"
                 >
                   50%
                 </span>
