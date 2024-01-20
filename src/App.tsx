@@ -38,7 +38,7 @@ function App() {
         </section>
 
         <section className="p-6">
-          <p className="mb-6 text-xs font-bold tracking-[0.115375em] text-sunshine-fg">
+          <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
             SNEAKER COMPANY
           </p>
 
