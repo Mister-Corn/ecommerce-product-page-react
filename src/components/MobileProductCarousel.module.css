@@ -1,8 +1,0 @@
-.productCarousel {
-  --swipe-delta: 0;
-}
-
-.productCarousel__img {
-  transform: translateX(var(--swipe-delta));
-  transition: transform 300ms ease-out;
-}
