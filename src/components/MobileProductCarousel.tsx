@@ -1,28 +1,36 @@
-import { useSwipeable } from 'react-swipeable'
+import { SwipeEventData, useSwipeable } from 'react-swipeable'
 import imgProduct1 from '@/assets/products/image-product-1.jpg'
 import imgProduct2 from '@/assets/products/image-product-2.jpg'
 import imgProduct3 from '@/assets/products/image-product-3.jpg'
 import imgProduct4 from '@/assets/products/image-product-4.jpg'
 import iconPrevious from '@/assets/svgs/icon-previous.svg'
 import iconNext from '@/assets/svgs/icon-next.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import classes from './MobileProductCarousel.module.css'
 
 function MobileProductCarousel() {
   const images = [imgProduct1, imgProduct2, imgProduct3, imgProduct4]
 
   const { totalNumImages, currentImg, handlers } = useCarouselState(images)
 
+  const { handleSwiped, handleSwiping } = useUpdateSwipeDelta()
+
   const mobileSwipeHandlers = useSwipeable({
     onSwipedLeft: handlers.previous,
     onSwipedRight: handlers.next,
+    onSwiped: handleSwiped,
+    onSwiping: handleSwiping,
   })
 
   return (
-    <section {...mobileSwipeHandlers} className="relative">
+    <section
+      {...mobileSwipeHandlers}
+      className={`${classes.productCarousel} relative`}
+    >
       <img
         src={currentImg.src}
         alt=""
-        className="aspect-[4/3] w-full object-cover"
+        className={`${classes.productCarousel__img} aspect-[4/3] w-full object-cover`}
       />
 
       <span className="sr-only">
@@ -91,6 +99,49 @@ function useCarouselState(images: string[]) {
       previous: handlePrevious,
       next: handleNext,
     },
+  }
+}
+
+function useUpdateSwipeDelta() {
+  const [swipeDelta, setSwipeDelta] = useState(0)
+
+  useEffect(() => {
+    const carouselElement = document.querySelector(
+      `.${classes.productCarousel}`
+    ) as HTMLElement
+
+    if (carouselElement) {
+      console.log('happening')
+      carouselElement.style.setProperty('--swipe-delta', `${swipeDelta}px`)
+    }
+  }, [swipeDelta])
+
+  const handleSwiping = (e: SwipeEventData) => {
+    setSwipeDelta(e.deltaX)
+  }
+
+  const handleSwiped = (e: SwipeEventData) => {
+    const carouselElement = document.querySelector(
+      `.${classes.productCarousel}`
+    ) as HTMLElement
+
+    // On swipe end
+    const swipeDelta = e.deltaX
+
+    if (Math.abs(swipeDelta) > window.innerWidth / 2) {
+      // Swiped past threshold to move off screen
+      carouselElement.style.setProperty('--swipe-delta', `${swipeDelta * 2}px`)
+    } else {
+      // Animate back to center
+      carouselElement.style.setProperty('--swipe-delta', '0px')
+    }
+
+    setSwipeDelta(0)
+  }
+
+  return {
+    handleSwiped,
+    handleSwiping,
   }
 }
 
