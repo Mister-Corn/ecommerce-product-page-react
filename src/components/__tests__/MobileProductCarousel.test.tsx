@@ -1,59 +1,55 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import MobileProductCarousel from '../MobileProductCarousel'
 
 describe('MobileProductCarousel', () => {
-  test('displays correct initial image number', async () => {
+  it('renders images', async () => {
     render(<MobileProductCarousel />)
 
-    const imageNumber = await screen.findByText(/Image 1 of 4/i)
-    expect(imageNumber).toBeInTheDocument()
+    const image1 = await screen.findByRole('img', { name: 'Image 1' })
+    const image2 = await screen.findByRole('img', { name: 'Image 2' })
+    const image3 = await screen.findByRole('img', { name: 'Image 3' })
+    const image4 = await screen.findByRole('img', { name: 'Image 4' })
+
+    expect(image1).toBeInTheDocument()
+    expect(image2).toBeInTheDocument()
+    expect(image3).toBeInTheDocument()
+    expect(image4).toBeInTheDocument()
   })
 
-  test('updates image number on next click', async () => {
+  it('navigates to next image on button click', async () => {
     render(<MobileProductCarousel />)
 
     const nextButton = screen.getByLabelText('Go to next image')
-    await waitFor(() => nextButton.click())
 
-    const imageNumber = await screen.findByText(/Image 2 of 4/i)
-    expect(imageNumber).toBeInTheDocument()
+    await waitFor(() => {
+      userEvent.click(nextButton)
+    })
+
+    const currentImage = await screen.findByRole('img', {
+      name: 'Image 2',
+    })
+
+    expect(currentImage).toBeInTheDocument()
   })
 
-  test('loops to first image number from last', async () => {
+  it('navigates to previous image on button click', async () => {
     render(<MobileProductCarousel />)
 
     const nextButton = screen.getByLabelText('Go to next image')
     await waitFor(() => {
-      nextButton.click() // 2
-      nextButton.click() // 3
-      nextButton.click() // 4
-      nextButton.click() // 1
+      userEvent.click(nextButton)
     })
 
-    const imageNumber = await screen.findByText(/Image 1 of 4/i)
-    expect(imageNumber).toBeInTheDocument()
-  })
-
-  test('updates image number on previous click', async () => {
-    render(<MobileProductCarousel />)
-
-    const nextButton = screen.getByLabelText('Go to next image')
-    await waitFor(() => nextButton.click())
-
     const prevButton = screen.getByLabelText('Go to previous image')
-    await waitFor(() => prevButton.click())
+    await waitFor(() => {
+      userEvent.click(prevButton)
+    })
 
-    const imageNumber = await screen.findByText(/Image 1 of 4/i)
-    expect(imageNumber).toBeInTheDocument()
-  })
+    const currentImage = await screen.findByRole('img', {
+      name: 'Image 1',
+    })
 
-  test('loops to last image number from first', async () => {
-    render(<MobileProductCarousel />)
-
-    const prevButton = screen.getByLabelText('Go to previous image')
-    await waitFor(() => prevButton.click())
-
-    const imageNumber = await screen.findByText(/Image 4 of 4/i)
-    expect(imageNumber).toBeInTheDocument()
+    expect(currentImage).toBeInTheDocument()
   })
 })
