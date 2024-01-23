@@ -9,6 +9,46 @@ import { useState } from 'react'
 
 function MobileProductCarousel() {
   const images = [imgProduct1, imgProduct2, imgProduct3, imgProduct4]
+
+  const { totalNumImages, currentImg, handlers } = useCarouselState(images)
+
+  const mobileSwipeHandlers = useSwipeable({
+    onSwipedLeft: handlers.previous,
+    onSwipedRight: handlers.next,
+  })
+
+  return (
+    <section {...mobileSwipeHandlers} className="relative">
+      <img
+        src={currentImg.src}
+        alt=""
+        className="aspect-[4/3] w-full object-cover"
+      />
+
+      <span className="sr-only">
+        Product image {currentImg.number} of {totalNumImages}
+      </span>
+
+      <button
+        onClick={handlers.previous}
+        aria-label="Go to previous image"
+        className="absolute left-4 top-1/2 rounded-full bg-white p-3"
+      >
+        <img src={iconPrevious} alt="Previous" className="h-3 w-3" />
+      </button>
+
+      <button
+        onClick={handlers.next}
+        aria-label="Go to next image"
+        className="absolute right-4 top-1/2 rounded-full bg-white p-3"
+      >
+        <img src={iconNext} alt="Next" className="h-3 w-3" />
+      </button>
+    </section>
+  )
+}
+
+function useCarouselState(images: string[]) {
   const [currentImgIndex, setCurrentImgIndex] = useState(0)
 
   const currentImg = images[currentImgIndex]
@@ -41,40 +81,17 @@ function MobileProductCarousel() {
     })
   }
 
-  const mobileSwipeHandlers = useSwipeable({
-    onSwipedLeft: handlePrevious,
-    onSwipedRight: handleNext,
-  })
-
-  return (
-    <section {...mobileSwipeHandlers} className="relative">
-      <img
-        src={currentImg}
-        alt=""
-        className="aspect-[4/3] w-full object-cover"
-      />
-
-      <span className="sr-only">
-        Product image {currentImgNumber} of {totalNumImages}
-      </span>
-
-      <button
-        onClick={handlePrevious}
-        aria-label="Go to previous image"
-        className="absolute left-4 top-1/2 rounded-full bg-white p-3"
-      >
-        <img src={iconPrevious} alt="Previous" className="h-3 w-3" />
-      </button>
-
-      <button
-        onClick={handleNext}
-        aria-label="Go to next image"
-        className="absolute right-4 top-1/2 rounded-full bg-white p-3"
-      >
-        <img src={iconNext} alt="Next" className="h-3 w-3" />
-      </button>
-    </section>
-  )
+  return {
+    totalNumImages,
+    currentImg: {
+      src: currentImg,
+      number: currentImgNumber,
+    },
+    handlers: {
+      previous: handlePrevious,
+      next: handleNext,
+    },
+  }
 }
 
 export default MobileProductCarousel
