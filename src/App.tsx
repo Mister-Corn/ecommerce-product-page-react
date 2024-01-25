@@ -2,11 +2,11 @@ import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
 import avatar from './assets/image-avatar.png'
-import imgProduct1 from './assets/products/image-product-1.jpg'
 import mobileMenuIcon from './assets/svgs/icon-menu.svg'
 import iconMinus from './assets/svgs/icon-minus.svg'
 import iconPlus from './assets/svgs/icon-plus.svg'
 import logo from './assets/svgs/logo.svg'
+import MobileProductCarousel from '@/components/MobileProductCarousel'
 
 function App() {
   return (
@@ -32,13 +32,7 @@ function App() {
       </header>
 
       <main>
-        <section>
-          <img
-            src={imgProduct1}
-            alt=""
-            className="aspect-[4/3] w-full object-cover"
-          />
-        </section>
+        <MobileProductCarousel />
 
         <section className="p-6">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
