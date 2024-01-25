@@ -12,36 +12,34 @@ function MobileProductCarousel() {
   const images = [imgProduct1, imgProduct2, imgProduct3, imgProduct4]
 
   return (
-    <section className="relative">
-      <Swiper
-        aria-label="Product images"
-        spaceBetween={30}
-        effect="slide"
-        navigation={true}
-        pagination={{ clickable: true }}
-        modules={[Navigation, Pagination]}
-        className="mySwiper"
-        loop
-        keyboard={{ enabled: true }}
-        a11y={{
-          prevSlideMessage: 'Previous slide',
-          nextSlideMessage: 'Next slide',
-        }}
-      >
-        {images.map((img, i) => (
-          <SwiperSlide key={img}>
-            <img
-              src={img}
-              alt={`Image ${i + 1}`}
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </SwiperSlide>
-        ))}
+    <Swiper
+      aria-label="Product images"
+      spaceBetween={30}
+      effect="slide"
+      navigation={true}
+      pagination={{ clickable: true }}
+      modules={[Navigation, Pagination]}
+      className="mySwiper"
+      loop
+      keyboard={{ enabled: true }}
+      a11y={{
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
+      }}
+    >
+      {images.map((img, i) => (
+        <SwiperSlide key={img}>
+          <img
+            src={img}
+            alt={`Image ${i + 1}`}
+            className="aspect-[4/3] w-full object-cover"
+          />
+        </SwiperSlide>
+      ))}
 
-        <CarouselNavButton direction="previous" />
-        <CarouselNavButton direction="next" />
-      </Swiper>
-    </section>
+      <CarouselNavButton direction="previous" />
+      <CarouselNavButton direction="next" />
+    </Swiper>
   )
 }
 

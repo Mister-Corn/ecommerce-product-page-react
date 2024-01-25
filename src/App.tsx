@@ -32,7 +32,9 @@ function App() {
       </header>
 
       <main>
-        <MobileProductCarousel />
+        <section className="relative">
+          <MobileProductCarousel />
+        </section>
 
         <section className="p-6">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
