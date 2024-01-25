@@ -46,6 +46,10 @@ function MobileProductCarousel() {
 }
 
 /**
+ * Previous & next buttons which are overlaid over the image. These buttons
+ * interact with the Swiper instance to change the image displayed in the
+ * carousel.
+ *
  * @note This component needs to be nested inside the Swiper component in order
  * for the hook to access the swiper instance.
  */
