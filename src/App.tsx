@@ -7,6 +7,7 @@ import iconMinus from './assets/svgs/icon-minus.svg'
 import iconPlus from './assets/svgs/icon-plus.svg'
 import logo from './assets/svgs/logo.svg'
 import MobileProductCarousel from '@/components/MobileProductCarousel'
+import MobileCartDisplay from './components/MobileCartDisplay'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <main>
         <section className="relative">
           <MobileProductCarousel />
+          <MobileCartDisplay />
         </section>
 
         <section className="p-6">
