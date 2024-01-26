@@ -35,7 +35,9 @@ function App() {
       <main>
         <section className="relative">
           <MobileProductCarousel />
-          <MobileCartDisplay />
+          <MobileCartDisplay
+            cartContents={{ productId: 'sneakersFallLimited', quantity: 3 }}
+          />
         </section>
 
         <section className="p-6">
