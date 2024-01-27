@@ -1,6 +1,6 @@
-import IconCart from '@/assets/components/IconCart'
 import iconMinus from '@/assets/svgs/icon-minus.svg'
 import iconPlus from '@/assets/svgs/icon-plus.svg'
+import { MobileCartDialog } from './MobileCartDisplay'
 
 function MobileCartControls() {
   return (
@@ -26,10 +26,7 @@ function MobileCartControls() {
         </button>
       </div>
 
-      <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
-        <IconCart fill="white" />
-        Add to cart
-      </button>
+      <MobileCartDialog />
     </>
   )
 }
