@@ -1,11 +1,10 @@
+import MobileProductCarousel from '@/components/MobileProductCarousel'
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
 import avatar from './assets/image-avatar.png'
 import mobileMenuIcon from './assets/svgs/icon-menu.svg'
 import logo from './assets/svgs/logo.svg'
-import MobileProductCarousel from '@/components/MobileProductCarousel'
-import MobileCartDisplay from './components/MobileCartDisplay'
 import MobileCartControls from './components/MobileCartControls'
 
 function App() {
@@ -32,11 +31,8 @@ function App() {
       </header>
 
       <main>
-        <section className="relative">
+        <section id="product-display--mobile" className="relative">
           <MobileProductCarousel />
-          <MobileCartDisplay
-            cartContents={{ productId: 'sneakersFallLimited', quantity: 3 }}
-          />
         </section>
 
         <section className="p-6">
