@@ -6,6 +6,7 @@ import avatar from './assets/image-avatar.png'
 import mobileMenuIcon from './assets/svgs/icon-menu.svg'
 import logo from './assets/svgs/logo.svg'
 import MobileCartControls from './components/MobileCartControls'
+import { MobileCartDialog } from './components/MobileCartDisplay'
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
       <main>
         <section id="product-display--mobile" className="relative">
           <MobileProductCarousel />
+          <MobileCartDialog
+            container={
+              document.querySelector('#product-display--mobile') as HTMLElement
+            }
+          />
         </section>
 
         <section className="p-6">

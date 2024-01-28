@@ -1,16 +1,25 @@
 import trashIcon from '@/assets/svgs/icon-delete.svg'
-import { type ProductId, productCatalog } from '@/data/productCatalog'
-import { convertToDecimalPriceUSD } from '@/utils/prices'
-import { type ReactNode } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
-import IconCart from '@/assets/components/IconCart'
+import { productCatalog, type ProductId } from '@/data/productCatalog'
 import { cn } from '@/utils'
+import { convertToDecimalPriceUSD } from '@/utils/prices'
+import * as Dialog from '@radix-ui/react-dialog'
+import { type ReactNode } from 'react'
 
 export type MobileCartDisplayProps = {
   cartContents?: { productId: ProductId; quantity: number }
   className?: string
 }
 
+/**
+ * Renders a mobile cart display component.
+ *
+ * @param props - The component props.
+ * @param props.cartContents - The contents of the cart, including
+ * the product ID and quantity.
+ * @param props.className - The optional CSS class name for styling
+ * purposes. Applied on the outer `div` element.
+ * @returns The rendered mobile cart display component.
+ */
 function MobileCartDisplay({
   cartContents,
   className,
@@ -84,21 +93,23 @@ function MobileCartDisplay({
   )
 }
 
-export function MobileCartDialog() {
+export type MobileCartDialogProps = {
+  container?: HTMLElement | null
+}
+
+/**
+ * Renders a mobile cart dialog component.
+ *
+ * @param props - The component props.
+ * @param props.container - The container element for which the
+ * dialog content will portal into. @default document.body
+ * @returns The rendered mobile cart dialog component.
+ */
+export function MobileCartDialog({ container }: MobileCartDialogProps) {
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
-          <IconCart fill="white" />
-          Add to cart
-        </button>
-      </Dialog.Trigger>
-      <Dialog.DialogPortal
-        container={
-          document.querySelector('#product-display--mobile') as HTMLElement
-        }
-      >
-        <Dialog.Content className="absolute left-0 top-0 z-50 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+      <Dialog.DialogPortal container={container}>
+        <Dialog.Content className="absolute left-0 top-0 z-50 h-full w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
           <MobileCartDisplay
             cartContents={{ productId: 'sneakersFallLimited', quantity: 2 }}
           />

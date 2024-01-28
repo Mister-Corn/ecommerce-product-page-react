@@ -1,8 +1,11 @@
+import IconCart from '@/assets/components/IconCart'
 import iconMinus from '@/assets/svgs/icon-minus.svg'
 import iconPlus from '@/assets/svgs/icon-plus.svg'
-import { MobileCartDialog } from './MobileCartDisplay'
+import { useAppState } from '@/data/state'
 
 function MobileCartControls() {
+  const setIsCartOpen = useAppState((state) => state.setCartOpen)
+
   return (
     <>
       <div className="mb-4 mt-6 flex w-full flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5">
@@ -26,7 +29,15 @@ function MobileCartControls() {
         </button>
       </div>
 
-      <MobileCartDialog />
+      <button
+        onClick={() => {
+          setIsCartOpen(true)
+        }}
+        className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20"
+      >
+        <IconCart fill="white" />
+        Add to cart
+      </button>
     </>
   )
 }
