@@ -41,7 +41,7 @@ function MobileCartDisplay({
   if (!cartContents) {
     return (
       <CartTemplate>
-        <div className="flex flex-grow items-center justify-center">
+        <div className="p-20 text-center">
           <p className="font-bold text-black-lighter">Your cart is empty.</p>
         </div>
       </CartTemplate>
