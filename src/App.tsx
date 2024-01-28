@@ -11,7 +11,7 @@ import { MobileCartDialog } from './components/MobileCartDisplay'
 function App() {
   return (
     <>
-      <header className="flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
+      <header className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
         <div className="flex flex-row items-baseline gap-4">
           <img
             src={mobileMenuIcon}
@@ -31,16 +31,14 @@ function App() {
         </div>
       </header>
 
+      <MobileCartDialog
+        container={document.querySelector('header') as HTMLElement}
+      />
+
       <main>
         <section id="product-display--mobile" className="relative">
           <MobileProductCarousel />
         </section>
-
-        <MobileCartDialog
-          container={
-            document.querySelector('#product-display--mobile') as HTMLElement
-          }
-        />
 
         <section className="p-6">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">

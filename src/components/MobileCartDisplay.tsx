@@ -103,13 +103,19 @@ export type MobileCartDialogProps = {
  * @param props - The component props.
  * @param props.container - The container element for which the
  * dialog content will portal into. @default document.body
- * @returns The rendered mobile cart dialog component.
+ * @returns The rendered mobile cart dialog component.The dialog will be
+ * displayed below the `props.container` element.
  */
 export function MobileCartDialog({ container }: MobileCartDialogProps) {
+  const containerHeight = container?.offsetHeight ?? 0
+
   return (
     <Dialog.Root>
       <Dialog.DialogPortal container={container}>
-        <Dialog.Content className="absolute left-0 top-0 z-50 h-full w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+        <Dialog.Content
+          style={{ top: `${containerHeight}px` }}
+          className="absolute left-0 z-50 h-full w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+        >
           <MobileCartDisplay
             cartContents={{ productId: 'sneakersFallLimited', quantity: 2 }}
           />
