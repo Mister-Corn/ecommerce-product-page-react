@@ -34,12 +34,13 @@ function App() {
       <main>
         <section id="product-display--mobile" className="relative">
           <MobileProductCarousel />
-          <MobileCartDialog
-            container={
-              document.querySelector('#product-display--mobile') as HTMLElement
-            }
-          />
         </section>
+
+        <MobileCartDialog
+          container={
+            document.querySelector('#product-display--mobile') as HTMLElement
+          }
+        />
 
         <section className="p-6">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
