@@ -1,17 +1,17 @@
+import MobileProductCarousel from '@/components/MobileProductCarousel'
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
 import avatar from './assets/image-avatar.png'
 import mobileMenuIcon from './assets/svgs/icon-menu.svg'
-import iconMinus from './assets/svgs/icon-minus.svg'
-import iconPlus from './assets/svgs/icon-plus.svg'
 import logo from './assets/svgs/logo.svg'
-import MobileProductCarousel from '@/components/MobileProductCarousel'
+import MobileCartControls from './components/MobileCartControls'
+import { MobileCartDialog } from './components/MobileCartDisplay'
 
 function App() {
   return (
     <>
-      <header className="flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
+      <header className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
         <div className="flex flex-row items-baseline gap-4">
           <img
             src={mobileMenuIcon}
@@ -23,16 +23,20 @@ function App() {
         </div>
 
         <div className="flex flex-row items-baseline gap-5">
-          <button aria-label="Cart">
-            <IconCart fill="#69707D" />
-          </button>
+          <MobileCartDialog>
+            <button aria-label="Cart">
+              <IconCart fill="#69707D" />
+            </button>
+          </MobileCartDialog>
 
           <img src={avatar} alt="Your account" className="h-6 w-6" />
         </div>
       </header>
 
       <main>
-        <MobileProductCarousel />
+        <section id="product-display--mobile" className="relative">
+          <MobileProductCarousel />
+        </section>
 
         <section className="p-6">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
@@ -72,31 +76,7 @@ function App() {
             </span>
           </div>
 
-          <div className="mb-4 mt-6 flex w-full flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5">
-            <button
-              aria-label="Decrement quantity"
-              className="pl-6 text-sunshine-fg"
-            >
-              <img src={iconMinus} alt="-" />
-            </button>
-            <span
-              className="font-bold"
-              aria-label="Current quantity to add to cart"
-            >
-              0
-            </span>
-            <button
-              aria-label="Increment quantity"
-              className="pr-6 text-sunshine-fg"
-            >
-              <img src={iconPlus} alt="+" />
-            </button>
-          </div>
-
-          <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
-            <IconCart fill="white" />
-            Add to cart
-          </button>
+          <MobileCartControls />
         </section>
       </main>
     </>
