@@ -56,23 +56,17 @@ describe('App', () => {
   })
 
   // Cart dialog is displayed at the bottom of the screen
-  // Not working 😔
-  it.skip('should display cart dialog at the bottom of the screen', async () => {
+  it('should display cart dialog below the header element', async () => {
     const getCartDialog = () => screen.queryByRole('dialog')
 
-    render(<App />, { container: document.body })
+    render(<App />)
 
     expect(getCartDialog()).not.toBeInTheDocument()
 
     const cartIcon = screen.getByRole('button', { name: 'Cart' })
-    userEvent.click(cartIcon, {
-      pointerState: await userEvent.pointer({ target: cartIcon }),
-    }) // @see https://github.com/radix-ui/primitives/issues/1822#issuecomment-1820797668
+    await waitFor(() => userEvent.click(cartIcon))
 
-    const cartDialog = await waitFor(() => screen.getByRole('dialog'), {
-      timeout: 3000,
-    }) // waits up to 5000ms
-
+    const cartDialog = getCartDialog()
     expect(cartDialog).toBeInTheDocument()
 
     const container = document.querySelector('header')
