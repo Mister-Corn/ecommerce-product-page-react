@@ -11,3 +11,4 @@ export const productCatalog = {
 } as const
 
 export type ProductId = keyof typeof productCatalog
+export type CartLineItem = { productId: ProductId; quantity: number }
