@@ -7,8 +7,42 @@ import mobileMenuIcon from './assets/svgs/icon-menu.svg'
 import logo from './assets/svgs/logo.svg'
 import MobileCartControls from './components/MobileCartControls'
 import { MobileCartDialog } from './components/MobileCartDisplay'
+import { useAppState } from './data/globalState'
+import { forwardRef } from 'react'
+
+type HeaderCartButtonProps = {
+  quantityInCart?: number
+}
+
+const HeaderCartButton = forwardRef<HTMLButtonElement, HeaderCartButtonProps>(
+  ({ quantityInCart = 0, ...otherButtonProps }, ref) => {
+    return (
+      <button
+        aria-label="Cart"
+        className="relative"
+        ref={ref}
+        {...otherButtonProps}
+      >
+        {quantityInCart > 0 && (
+          <span
+            className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-[6.5px] bg-sunshine-fg px-[7px] py-0 text-[10px] font-bold text-white"
+            aria-label={`${quantityInCart} items in cart`}
+          >
+            {quantityInCart}
+          </span>
+        )}
+
+        <IconCart fill="#69707D" />
+      </button>
+    )
+  }
+)
+
+HeaderCartButton.displayName = 'HeaderCartButton'
 
 function App() {
+  const quantityInCart = useAppState((state) => state.cartContents?.quantity)
+
   return (
     <>
       <header className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
@@ -24,9 +58,7 @@ function App() {
 
         <div className="flex flex-row items-baseline gap-5">
           <MobileCartDialog>
-            <button aria-label="Cart">
-              <IconCart fill="#69707D" />
-            </button>
+            <HeaderCartButton quantityInCart={quantityInCart} />
           </MobileCartDialog>
 
           <img src={avatar} alt="Your account" className="h-6 w-6" />
