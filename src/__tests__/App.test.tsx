@@ -58,18 +58,23 @@ describe('App', () => {
   // Cart dialog is displayed at the bottom of the screen
   // Not working 😔
   it.skip('should display cart dialog at the bottom of the screen', async () => {
-    const getCartDialog = () => screen.queryByText(/cart is empty/i)
+    const getCartDialog = () => screen.queryByRole('dialog')
 
     render(<App />, { container: document.body })
 
     expect(getCartDialog()).not.toBeInTheDocument()
 
     const cartIcon = screen.getByRole('button', { name: 'Cart' })
-    await waitFor(() => userEvent.click(cartIcon))
+    userEvent.click(cartIcon, {
+      pointerState: await userEvent.pointer({ target: cartIcon }),
+    }) // @see https://github.com/radix-ui/primitives/issues/1822#issuecomment-1820797668
 
-    const cartDialog = await waitFor(() => getCartDialog(), { timeout: 3000 }) // waits up to 5000ms
+    const cartDialog = await waitFor(() => screen.getByRole('dialog'), {
+      timeout: 3000,
+    }) // waits up to 5000ms
+
     expect(cartDialog).toBeInTheDocument()
-    console.log({ cartDialog })
+
     const container = document.querySelector('header')
     const containerHeight = container?.offsetHeight ?? 0
     expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
