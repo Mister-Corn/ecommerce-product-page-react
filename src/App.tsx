@@ -77,6 +77,13 @@ function App() {
           </div>
 
           <MobileCartControls />
+
+          <MobileCartDialog>
+            <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
+              <IconCart fill="white" />
+              Add to cart
+            </button>
+          </MobileCartDialog>
         </section>
       </main>
     </>
