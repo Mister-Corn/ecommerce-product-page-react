@@ -6,7 +6,7 @@ export const productCatalog = {
     thumbnail: sneakersFallLimitedThumbnail,
     thumbnailAlt:
       'Side view of Fall Limited Edition Sneakers with a white upper and beige sole, displayed against an orange background.',
-    price: 12500, // In USD
+    price: 12500, // In USD cents
   },
 } as const
 
