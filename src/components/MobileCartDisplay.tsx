@@ -3,7 +3,7 @@ import { productCatalog, type ProductId } from '@/data/productCatalog'
 import { cn } from '@/utils'
 import { convertToDecimalPriceUSD } from '@/utils/prices'
 import * as Dialog from '@radix-ui/react-dialog'
-import { type ReactNode } from 'react'
+import { useLayoutEffect, useState, type ReactNode } from 'react'
 
 export type MobileCartDisplayProps = {
   cartContents?: { productId: ProductId; quantity: number }
@@ -94,27 +94,36 @@ function MobileCartDisplay({
 }
 
 export type MobileCartDialogProps = {
-  container?: HTMLElement | null
+  children: ReactNode
 }
 
 /**
- * Renders a mobile cart dialog component.
+ * Renders a mobile cart dialog that displays the cart contents.
+ * @note The mobile cart renders below the header element.
  *
- * @param props - The component props.
- * @param props.container - The container element for which the
- * dialog content will portal into. @default document.body
- * @returns The rendered mobile cart dialog component.The dialog will be
- * displayed below the `props.container` element.
+ * @param props.children - The children to render as the dialog trigger (e.g.
+ * "Cart" button).
+ * @returns The rendered mobile cart dialog.
  */
-export function MobileCartDialog({ container }: MobileCartDialogProps) {
-  const containerHeight = container?.offsetHeight ?? 0
+export function MobileCartDialog({ children }: MobileCartDialogProps) {
+  const [headerHeight, setHeaderHeight] = useState(0)
+
+  useLayoutEffect(() => {
+    const header = document.querySelector('header')
+
+    if (header) {
+      setHeaderHeight(header.getBoundingClientRect().height)
+    }
+  }, [])
 
   return (
     <Dialog.Root>
-      <Dialog.DialogPortal container={container}>
+      <Dialog.DialogTrigger asChild>{children}</Dialog.DialogTrigger>
+
+      <Dialog.DialogPortal>
         <Dialog.Content
-          style={{ top: `${containerHeight}px` }}
-          className="absolute left-0 z-50 h-full w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+          style={{ top: `${headerHeight}px` }}
+          className="fixed left-0 z-50 w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
           <MobileCartDisplay
             cartContents={{ productId: 'sneakersFallLimited', quantity: 2 }}

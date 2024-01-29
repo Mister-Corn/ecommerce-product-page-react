@@ -23,17 +23,15 @@ function App() {
         </div>
 
         <div className="flex flex-row items-baseline gap-5">
-          <button aria-label="Cart">
-            <IconCart fill="#69707D" />
-          </button>
+          <MobileCartDialog>
+            <button aria-label="Cart">
+              <IconCart fill="#69707D" />
+            </button>
+          </MobileCartDialog>
 
           <img src={avatar} alt="Your account" className="h-6 w-6" />
         </div>
       </header>
-
-      <MobileCartDialog
-        container={document.querySelector('header') as HTMLElement}
-      />
 
       <main>
         <section id="product-display--mobile" className="relative">
