@@ -18,16 +18,6 @@ type State = {
 }
 
 type Actions = {
-  // Cart
-  /**
-   * Action that reads the quantity in orderControls, and adds that many product
-   * of "sneakersFallLimited" to cartContents.
-   */
-  addFallSneakersToCart: () => void
-  /**
-   * Clears the (singular) item in the cart.
-   */
-  clearCart: () => void
   // Order Controls
   /**
    * Action that adjusts the quantity to order displayed in the UI, both up and
@@ -39,6 +29,16 @@ type Actions = {
    * (+), 'decrement' decreases (-).
    */
   adjustQuantity: (direction: 'increment' | 'decrement') => void
+  // Cart
+  /**
+   * Action that reads the quantity in orderControls, and adds that many product
+   * of "sneakersFallLimited" to cartContents.
+   */
+  addFallSneakersToCart: () => void
+  /**
+   * Clears the (singular) item in the cart.
+   */
+  clearCart: () => void
 }
 
 /**
@@ -51,6 +51,25 @@ export const useAppState = create<State & Actions>((set) => ({
   orderControls: {
     quantity: 0,
   },
+  adjustQuantity: (direction: 'increment' | 'decrement') =>
+    set((state) => {
+      const currentQty = state.orderControls.quantity
+
+      if (direction === 'decrement') {
+        return {
+          orderControls: {
+            // Quantity cannot go below 0.
+            quantity: currentQty !== 0 ? currentQty - 1 : currentQty,
+          },
+        }
+      }
+
+      return {
+        orderControls: {
+          quantity: currentQty + 1,
+        },
+      }
+    }),
   addFallSneakersToCart: () =>
     set((state) => {
       const quantityRequested = state.orderControls.quantity
@@ -80,25 +99,6 @@ export const useAppState = create<State & Actions>((set) => ({
     set(() => {
       return {
         cartContents: undefined,
-      }
-    }),
-  adjustQuantity: (direction: 'increment' | 'decrement') =>
-    set((state) => {
-      const currentQty = state.orderControls.quantity
-
-      if (direction === 'decrement') {
-        return {
-          orderControls: {
-            // Quantity cannot go below 0.
-            quantity: currentQty !== 0 ? currentQty - 1 : currentQty,
-          },
-        }
-      }
-
-      return {
-        orderControls: {
-          quantity: currentQty + 1,
-        },
       }
     }),
 }))
