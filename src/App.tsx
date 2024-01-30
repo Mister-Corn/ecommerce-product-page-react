@@ -5,8 +5,13 @@ import IconCart from './assets/components/IconCart'
 import MobileCartControls from './components/MobileCartControls'
 import { MobileCartDialog } from './components/MobileCartDisplay'
 import MobileHeader from './components/MobileHeader'
+import { useAppState } from './data/globalState'
 
 function App() {
+  const addFallSneakerToCart = useAppState(
+    (state) => state.addFallSneakersToCart
+  )
+
   return (
     <>
       <MobileHeader />
@@ -57,7 +62,10 @@ function App() {
           <MobileCartControls />
 
           <MobileCartDialog>
-            <button className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20">
+            <button
+              onClick={addFallSneakerToCart}
+              className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20"
+            >
               <IconCart fill="white" />
               Add to cart
             </button>
