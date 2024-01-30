@@ -9,6 +9,7 @@ import { useLayoutEffect, useState, type ReactNode } from 'react'
 export type MobileCartDisplayProps = {
   cartContents?: { productId: ProductId; quantity: number }
   className?: string
+  clearCart: () => void
 }
 
 /**
@@ -17,12 +18,14 @@ export type MobileCartDisplayProps = {
  * @param props - The component props.
  * @param props.cartContents - The contents of the cart, including
  * the product ID and quantity.
+ * @param props.clearCart - The function that clears the contents of the cart.
  * @param props.className - The optional CSS class name for styling
  * purposes. Applied on the outer `div` element.
  * @returns The rendered mobile cart display component.
  */
 function MobileCartDisplay({
   cartContents,
+  clearCart,
   className,
 }: MobileCartDisplayProps) {
   const CartTemplate = ({ children }: { children: ReactNode }) => (
@@ -80,7 +83,7 @@ function MobileCartDisplay({
           </div>
 
           {/* Remove from cart button */}
-          <button aria-label="Remove item from cart">
+          <button aria-label="Remove item from cart" onClick={clearCart}>
             <img src={trashIcon} alt="" />
           </button>
         </div>
@@ -108,6 +111,7 @@ export type MobileCartDialogProps = {
  */
 export function MobileCartDialog({ children }: MobileCartDialogProps) {
   const cartContents = useAppState((state) => state.cartContents)
+  const clearCart = useAppState((state) => state.clearCart)
   const [headerHeight, setHeaderHeight] = useState(0)
 
   useLayoutEffect(() => {
@@ -127,7 +131,10 @@ export function MobileCartDialog({ children }: MobileCartDialogProps) {
           style={{ top: `${headerHeight}px` }}
           className="fixed left-0 z-50 w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
-          <MobileCartDisplay cartContents={cartContents} />
+          <MobileCartDisplay
+            cartContents={cartContents}
+            clearCart={clearCart}
+          />
         </Dialog.Content>
       </Dialog.DialogPortal>
     </Dialog.Root>
