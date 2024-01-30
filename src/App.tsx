@@ -1,10 +1,10 @@
-import MobileProductCarousel from '@/components/MobileProductCarousel'
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
 import MobileCartControls from './components/MobileCartControls'
-import { MobileCartDialog } from './components/MobileCartDisplay'
+import MobileCartDialog from './components/MobileCartDialog'
 import MobileHeader from './components/MobileHeader'
+import MobileProductCarousel from './components/MobileProductCarousel'
 import { useAppState } from './data/globalState'
 
 function App() {

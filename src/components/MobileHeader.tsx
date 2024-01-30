@@ -3,7 +3,7 @@ import avatar from '@/assets/image-avatar.png'
 import mobileMenuIcon from '@/assets/svgs/icon-menu.svg'
 import logo from '@/assets/svgs/logo.svg'
 import { useAppState } from '@/data/globalState'
-import { MobileCartDialog } from './MobileCartDisplay'
+import MobileCartDialog from './MobileCartDialog'
 
 /**
  * Renders the mobile header component.
