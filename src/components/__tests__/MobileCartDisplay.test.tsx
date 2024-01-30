@@ -15,9 +15,15 @@ describe('MobileCartDisplay', () => {
       productId: 'sneakersFallLimited',
       quantity: 2,
     }
+    const clearCartMock = vi.fn()
 
     // Act
-    render(<MobileCartDisplay cartContents={cartContents} />)
+    render(
+      <MobileCartDisplay
+        cartContents={cartContents}
+        clearCart={clearCartMock}
+      />
+    )
 
     // Assert
     expect(screen.getByRole('heading', { name: /cart/i })).toBeInTheDocument()
@@ -29,22 +35,19 @@ describe('MobileCartDisplay', () => {
     ).toBeInTheDocument()
   })
 
-  // Renders empty cart message when cartContents is not provided
-  it('should render empty cart message when cartContents is not provided', () => {
-    // Act
-    render(<MobileCartDisplay />)
-
-    // Assert
-    expect(screen.getByText('Your cart is empty.')).toBeInTheDocument()
-  })
-
   // Handles missing or invalid cartContents prop
   it('should handle missing or invalid cartContents prop', () => {
     // Arrange
+    const clearCartMock = vi.fn()
     const cartContents: CartContents = undefined
 
     // Act
-    render(<MobileCartDisplay cartContents={cartContents} />)
+    render(
+      <MobileCartDisplay
+        cartContents={cartContents}
+        clearCart={clearCartMock}
+      />
+    )
 
     // Assert
     expect(screen.getByText('Your cart is empty.')).toBeInTheDocument()
@@ -53,13 +56,19 @@ describe('MobileCartDisplay', () => {
   // Displays correct product thumbnail
   it('should render correct product thumbnail when cartContents is provided', () => {
     // Arrange
+    const clearCartMock = vi.fn()
     const cartContents: CartContents = {
       productId: 'sneakersFallLimited',
       quantity: 2,
     }
 
     // Act
-    render(<MobileCartDisplay cartContents={cartContents} />)
+    render(
+      <MobileCartDisplay
+        cartContents={cartContents}
+        clearCart={clearCartMock}
+      />
+    )
 
     // Assert
     expect(
