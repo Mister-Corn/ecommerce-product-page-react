@@ -1,4 +1,5 @@
 import trashIcon from '@/assets/svgs/icon-delete.svg'
+import { useAppState } from '@/data/globalState'
 import { productCatalog, type ProductId } from '@/data/productCatalog'
 import { cn } from '@/utils'
 import { convertToDecimalPriceUSD } from '@/utils/prices'
@@ -106,6 +107,7 @@ export type MobileCartDialogProps = {
  * @returns The rendered mobile cart dialog.
  */
 export function MobileCartDialog({ children }: MobileCartDialogProps) {
+  const cartContents = useAppState((state) => state.cartContents)
   const [headerHeight, setHeaderHeight] = useState(0)
 
   useLayoutEffect(() => {
@@ -125,9 +127,7 @@ export function MobileCartDialog({ children }: MobileCartDialogProps) {
           style={{ top: `${headerHeight}px` }}
           className="fixed left-0 z-50 w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
-          <MobileCartDisplay
-            cartContents={{ productId: 'sneakersFallLimited', quantity: 2 }}
-          />
+          <MobileCartDisplay cartContents={cartContents} />
         </Dialog.Content>
       </Dialog.DialogPortal>
     </Dialog.Root>
