@@ -1,37 +1,20 @@
-import MobileProductCarousel from '@/components/MobileProductCarousel'
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
-import avatar from './assets/image-avatar.png'
-import mobileMenuIcon from './assets/svgs/icon-menu.svg'
-import logo from './assets/svgs/logo.svg'
 import MobileCartControls from './components/MobileCartControls'
-import { MobileCartDialog } from './components/MobileCartDisplay'
+import MobileCartDialog from './components/MobileCartDialog'
+import MobileHeader from './components/MobileHeader'
+import MobileProductCarousel from './components/MobileProductCarousel'
+import { useAppState } from './data/globalState'
 
 function App() {
+  const addFallSneakerToCart = useAppState(
+    (state) => state.addFallSneakersToCart
+  )
+
   return (
     <>
-      <header className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
-        <div className="flex flex-row items-baseline gap-4">
-          <img
-            src={mobileMenuIcon}
-            alt="Menu"
-            aria-label="Mobile Menu"
-            className="h-4 w-4"
-          />
-          <img src={logo} alt="logo" aria-label="sneakers" />
-        </div>
-
-        <div className="flex flex-row items-baseline gap-5">
-          <MobileCartDialog>
-            <button aria-label="Cart">
-              <IconCart fill="#69707D" />
-            </button>
-          </MobileCartDialog>
-
-          <img src={avatar} alt="Your account" className="h-6 w-6" />
-        </div>
-      </header>
+      <MobileHeader />
 
       <main>
         <section id="product-display--mobile" className="relative">
@@ -77,6 +60,16 @@ function App() {
           </div>
 
           <MobileCartControls />
+
+          <MobileCartDialog>
+            <button
+              onClick={addFallSneakerToCart}
+              className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20"
+            >
+              <IconCart fill="white" />
+              Add to cart
+            </button>
+          </MobileCartDialog>
         </section>
       </main>
     </>

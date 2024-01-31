@@ -2,12 +2,12 @@ import trashIcon from '@/assets/svgs/icon-delete.svg'
 import { productCatalog, type ProductId } from '@/data/productCatalog'
 import { cn } from '@/utils'
 import { convertToDecimalPriceUSD } from '@/utils/prices'
-import * as Dialog from '@radix-ui/react-dialog'
-import { useLayoutEffect, useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 export type MobileCartDisplayProps = {
   cartContents?: { productId: ProductId; quantity: number }
   className?: string
+  clearCart: () => void
 }
 
 /**
@@ -16,12 +16,14 @@ export type MobileCartDisplayProps = {
  * @param props - The component props.
  * @param props.cartContents - The contents of the cart, including
  * the product ID and quantity.
+ * @param props.clearCart - The function that clears the contents of the cart.
  * @param props.className - The optional CSS class name for styling
  * purposes. Applied on the outer `div` element.
  * @returns The rendered mobile cart display component.
  */
 function MobileCartDisplay({
   cartContents,
+  clearCart,
   className,
 }: MobileCartDisplayProps) {
   const CartTemplate = ({ children }: { children: ReactNode }) => (
@@ -79,7 +81,7 @@ function MobileCartDisplay({
           </div>
 
           {/* Remove from cart button */}
-          <button aria-label="Remove item from cart">
+          <button aria-label="Remove item from cart" onClick={clearCart}>
             <img src={trashIcon} alt="" />
           </button>
         </div>
@@ -90,47 +92,6 @@ function MobileCartDisplay({
         </button>
       </div>
     </CartTemplate>
-  )
-}
-
-export type MobileCartDialogProps = {
-  children: ReactNode
-}
-
-/**
- * Renders a mobile cart dialog that displays the cart contents.
- * @note The mobile cart renders below the header element.
- *
- * @param props.children - The children to render as the dialog trigger (e.g.
- * "Cart" button).
- * @returns The rendered mobile cart dialog.
- */
-export function MobileCartDialog({ children }: MobileCartDialogProps) {
-  const [headerHeight, setHeaderHeight] = useState(0)
-
-  useLayoutEffect(() => {
-    const header = document.querySelector('header')
-
-    if (header) {
-      setHeaderHeight(header.getBoundingClientRect().height)
-    }
-  }, [])
-
-  return (
-    <Dialog.Root>
-      <Dialog.DialogTrigger asChild>{children}</Dialog.DialogTrigger>
-
-      <Dialog.DialogPortal>
-        <Dialog.Content
-          style={{ top: `${headerHeight}px` }}
-          className="fixed left-0 z-50 w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-        >
-          <MobileCartDisplay
-            cartContents={{ productId: 'sneakersFallLimited', quantity: 2 }}
-          />
-        </Dialog.Content>
-      </Dialog.DialogPortal>
-    </Dialog.Root>
   )
 }
 

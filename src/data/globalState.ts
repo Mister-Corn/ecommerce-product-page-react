@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { CartLineItem } from './productCatalog'
+import { type CartLineItem } from './productCatalog'
 
 type State = {
   /**
