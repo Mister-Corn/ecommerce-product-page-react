@@ -19,17 +19,6 @@ describe('App', () => {
     expect(cartIcon).toBeInTheDocument()
   })
 
-  // Displays mobile product carousel with images
-  it('should display mobile product carousel with images', () => {
-    render(<App />)
-
-    const carousel = screen.getByLabelText('Product images')
-    expect(carousel).toBeInTheDocument()
-
-    const images = screen.getAllByRole('img')
-    expect(images.length).toBeGreaterThan(0)
-  })
-
   // Shows product details including name, description, price, and discount
   it('should show product details including name, description, price, and discount', () => {
     render(<App />)
@@ -47,30 +36,45 @@ describe('App', () => {
     expect(productDiscount).toBeInTheDocument()
   })
 
-  // Cart dialog is not displayed when cart icon is not clicked
-  it('should not display cart dialog when cart icon is not clicked', () => {
-    render(<App />)
+  describe('App - Mobile Product Carousel', () => {
+    // Displays mobile product carousel with images
+    it('should display mobile product carousel with images', () => {
+      render(<App />)
 
-    const cartDialog = screen.queryByRole('dialog')
-    expect(cartDialog).not.toBeInTheDocument()
+      const carousel = screen.getByLabelText('Product images')
+      expect(carousel).toBeInTheDocument()
+
+      const images = screen.getAllByRole('img')
+      expect(images.length).toBeGreaterThan(0)
+    })
   })
 
-  // Cart dialog is displayed at the bottom of the screen
-  it('should display cart dialog below the header element', async () => {
-    const getCartDialog = () => screen.queryByRole('dialog')
+  describe('App - Mobile Cart Dialog', () => {
+    // Cart dialog is not displayed when cart icon is not clicked
+    it('should not display cart dialog when cart icon is not clicked', () => {
+      render(<App />)
 
-    render(<App />)
+      const cartDialog = screen.queryByRole('dialog')
+      expect(cartDialog).not.toBeInTheDocument()
+    })
 
-    expect(getCartDialog()).not.toBeInTheDocument()
+    // Cart dialog is displayed at the bottom of the screen
+    it('should display cart dialog below the header element', async () => {
+      const getCartDialog = () => screen.queryByRole('dialog')
 
-    const cartIcon = screen.getByRole('button', { name: 'Cart' })
-    await waitFor(() => userEvent.click(cartIcon))
+      render(<App />)
 
-    const cartDialog = getCartDialog()
-    expect(cartDialog).toBeInTheDocument()
+      expect(getCartDialog()).not.toBeInTheDocument()
 
-    const container = document.querySelector('header')
-    const containerHeight = container?.offsetHeight ?? 0
-    expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
+      const cartIcon = screen.getByRole('button', { name: 'Cart' })
+      await waitFor(() => userEvent.click(cartIcon))
+
+      const cartDialog = getCartDialog()
+      expect(cartDialog).toBeInTheDocument()
+
+      const container = document.querySelector('header')
+      const containerHeight = container?.offsetHeight ?? 0
+      expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
+    })
   })
 })
