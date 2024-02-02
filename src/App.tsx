@@ -5,6 +5,7 @@ import MobileCartControls from './components/MobileCartControls'
 import MobileCartDialog from './components/MobileCartDialog'
 import MobileHeader from './components/MobileHeader'
 import MobileProductCarousel from './components/MobileProductCarousel'
+import { TopBar } from './components/TopBar'
 import { useAppState } from './data/globalState'
 import { useIsDesktop } from './hooks/useMediaQuery'
 
@@ -16,7 +17,11 @@ function App() {
   )
 
   return isDesktop ? (
-    <></>
+    <div className="w-full bg-white">
+      <div className="container mx-auto">
+        <TopBar />
+      </div>
+    </div>
   ) : (
     <>
       <MobileHeader />
