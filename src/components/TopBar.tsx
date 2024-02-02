@@ -3,6 +3,7 @@ import avatar from '@/assets/image-avatar.png'
 import logo from '@/assets/svgs/logo.svg'
 import { useAppState } from '@/data/globalState'
 import MobileCartDialog from './MobileCartDialog'
+import TopBarCart from './TopBarCart'
 
 export function TopBar() {
   const quantityInCart = useAppState(
@@ -40,20 +41,7 @@ export function TopBar() {
 
       {/* Right hand side of TopBar */}
       <div className="flex items-center gap-12">
-        <MobileCartDialog>
-          <button aria-label="Cart" className="relative">
-            {quantityInCart > 0 && (
-              <span
-                className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-[6.5px] bg-sunshine-fg px-[7px] py-0 text-[10px] font-bold text-white"
-                aria-label={`${quantityInCart} items in cart`}
-              >
-                {quantityInCart}
-              </span>
-            )}
-
-            <IconCart fill="#69707D" />
-          </button>
-        </MobileCartDialog>
+        <TopBarCart />
 
         {/* Avatar/Your Account */}
         <img src={avatar} alt="Your account" className="h-12 w-12" />
