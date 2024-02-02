@@ -18,7 +18,10 @@ function MobileHeader() {
   )
 
   return (
-    <header className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5">
+    <header
+      id="top-bar"
+      className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5"
+    >
       <div className="flex flex-row items-baseline gap-4">
         {/* Mobile menu button */}
         <img

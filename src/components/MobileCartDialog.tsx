@@ -9,7 +9,7 @@ export type MobileCartDialogProps = {
 
 /**
  * Renders a mobile cart dialog that displays the cart contents.
- * @note The mobile cart renders below the header element.
+ * @note The mobile cart renders below the `#top-bar` element.
  *
  * @param props.children - The children to render as the dialog trigger (e.g.
  * "Cart" button).
@@ -18,13 +18,13 @@ export type MobileCartDialogProps = {
 function MobileCartDialog({ children }: MobileCartDialogProps) {
   const cartContents = useAppState((state) => state.cartContents)
   const clearCart = useAppState((state) => state.clearCart)
-  const [headerHeight, setHeaderHeight] = useState(0)
+  const [topBarHeight, setTopBarHeight] = useState(0)
 
   useLayoutEffect(() => {
-    const header = document.querySelector('header')
+    const topBar = document.querySelector('#top-bar')
 
-    if (header) {
-      setHeaderHeight(header.getBoundingClientRect().height)
+    if (topBar) {
+      setTopBarHeight(topBar.getBoundingClientRect().height)
     }
   }, [])
 
@@ -34,7 +34,7 @@ function MobileCartDialog({ children }: MobileCartDialogProps) {
 
       <Dialog.Portal>
         <Dialog.Content
-          style={{ top: `${headerHeight}px` }}
+          style={{ top: `${topBarHeight}px` }}
           className="fixed left-0 z-50 w-full duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
         >
           <MobileCartDisplay
