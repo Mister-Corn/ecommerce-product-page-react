@@ -6,13 +6,18 @@ import MobileCartDialog from './components/MobileCartDialog'
 import MobileHeader from './components/MobileHeader'
 import MobileProductCarousel from './components/MobileProductCarousel'
 import { useAppState } from './data/globalState'
+import { useIsDesktop } from './hooks/useMediaQuery'
 
 function App() {
+  const isDesktop = useIsDesktop()
+
   const addFallSneakerToCart = useAppState(
     (state) => state.addFallSneakersToCart
   )
 
-  return (
+  return isDesktop ? (
+    <></>
+  ) : (
     <>
       <MobileHeader />
 
