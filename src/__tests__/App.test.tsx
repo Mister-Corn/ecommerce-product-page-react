@@ -10,6 +10,26 @@ describe('App', () => {
     expect(true).toBeTruthy()
   })
 
+  describe('Desktop', () => {
+    beforeEach(() => {
+      // Force desktop media query
+      ;(useIsDesktop as MockedFunction<typeof useIsDesktop>).mockReturnValue(
+        true
+      )
+    })
+
+    // Renders header content with logo and cart icon
+    it('should render header content with logo and cart icon', () => {
+      render(<App />)
+
+      const logo = screen.getByLabelText('sneakers')
+      expect(logo).toBeInTheDocument()
+
+      const cartIcon = screen.getByLabelText('Cart')
+      expect(cartIcon).toBeInTheDocument()
+    })
+  })
+
   describe('Mobile', () => {
     beforeEach(() => {
       // Force mobile media query
