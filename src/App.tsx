@@ -3,8 +3,8 @@ import './App.css'
 import IconCart from './assets/components/IconCart'
 import MobileCartControls from './components/MobileCartControls'
 import MobileCartDialog from './components/MobileCartDialog'
-import MobileHeader from './components/MobileHeader'
 import MobileProductCarousel from './components/MobileProductCarousel'
+import { DesktopTopBar, MobileTopBar } from './components/TopBar'
 import { useAppState } from './data/globalState'
 import { useIsDesktop } from './hooks/useMediaQuery'
 
@@ -16,10 +16,14 @@ function App() {
   )
 
   return isDesktop ? (
-    <></>
+    <div className="w-full bg-white">
+      <div className="container mx-auto">
+        <DesktopTopBar />
+      </div>
+    </div>
   ) : (
     <>
-      <MobileHeader />
+      <MobileTopBar />
 
       <main>
         <section id="product-display--mobile" className="relative">

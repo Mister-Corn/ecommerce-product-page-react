@@ -1,46 +1,69 @@
 // With help by CodiumAI
 import App from '@/App'
+import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useIsDesktop } from '__mocks__/useMediaQuery'
+import { type MockedFunction } from 'vitest'
 
 describe('App', () => {
   test('confirm that the testing software is behaving', () => {
     expect(true).toBeTruthy()
   })
 
-  // Renders header content with logo and cart icon
-  it('should render header content with logo and cart icon', () => {
-    render(<App />)
+  describe('Desktop', () => {
+    beforeEach(() => {
+      // Force desktop media query
+      ;(useIsDesktop as MockedFunction<typeof useIsDesktop>).mockReturnValue(
+        true
+      )
+    })
 
-    const logo = screen.getByLabelText('sneakers')
-    expect(logo).toBeInTheDocument()
+    // Renders header content with logo and cart icon
+    it('should render header content with logo and cart icon', () => {
+      render(<App />)
 
-    const cartIcon = screen.getByLabelText('Cart')
-    expect(cartIcon).toBeInTheDocument()
-  })
+      const logo = screen.getByLabelText('sneakers')
+      expect(logo).toBeInTheDocument()
 
-  // Shows product details including name, description, price, and discount
-  it('should show product details including name, description, price, and discount', () => {
-    render(<App />)
-
-    const productName = screen.getByText('Fall Limited Edition Sneakers')
-    expect(productName).toBeInTheDocument()
-
-    const productDescription = screen.getByText(/These low-profile sneakers/)
-    expect(productDescription).toBeInTheDocument()
-
-    const productPrice = screen.getByText('$125.00')
-    expect(productPrice).toBeInTheDocument()
-
-    const productDiscount = screen.getByText('50%')
-    expect(productDiscount).toBeInTheDocument()
+      const cartIcon = screen.getByLabelText('Cart')
+      expect(cartIcon).toBeInTheDocument()
+    })
   })
 
   describe('Mobile', () => {
     beforeEach(() => {
       // Force mobile media query
-      useIsDesktop.mockReturnValue(false)
+      ;(useIsDesktop as MockedFunction<typeof useIsDesktop>).mockReturnValue(
+        false
+      )
+    })
+
+    // Renders header content with logo and cart icon
+    it('should render header content with logo and cart icon', () => {
+      render(<App />)
+
+      const logo = screen.getByLabelText('sneakers')
+      expect(logo).toBeInTheDocument()
+
+      const cartIcon = screen.getByLabelText('Cart')
+      expect(cartIcon).toBeInTheDocument()
+    })
+
+    // Shows product details including name, description, price, and discount
+    it('should show product details including name, description, price, and discount', () => {
+      render(<App />)
+
+      const productName = screen.getByText('Fall Limited Edition Sneakers')
+      expect(productName).toBeInTheDocument()
+
+      const productDescription = screen.getByText(/These low-profile sneakers/)
+      expect(productDescription).toBeInTheDocument()
+
+      const productPrice = screen.getByText('$125.00')
+      expect(productPrice).toBeInTheDocument()
+
+      const productDiscount = screen.getByText('50%')
+      expect(productDiscount).toBeInTheDocument()
     })
 
     describe('App - Mobile Product Carousel', () => {
