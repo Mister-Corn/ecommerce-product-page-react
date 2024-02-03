@@ -9,38 +9,38 @@ describe('App', () => {
     expect(true).toBeTruthy()
   })
 
-  // Renders header content with logo and cart icon
-  it('should render header content with logo and cart icon', () => {
-    render(<App />)
-
-    const logo = screen.getByLabelText('sneakers')
-    expect(logo).toBeInTheDocument()
-
-    const cartIcon = screen.getByLabelText('Cart')
-    expect(cartIcon).toBeInTheDocument()
-  })
-
-  // Shows product details including name, description, price, and discount
-  it('should show product details including name, description, price, and discount', () => {
-    render(<App />)
-
-    const productName = screen.getByText('Fall Limited Edition Sneakers')
-    expect(productName).toBeInTheDocument()
-
-    const productDescription = screen.getByText(/These low-profile sneakers/)
-    expect(productDescription).toBeInTheDocument()
-
-    const productPrice = screen.getByText('$125.00')
-    expect(productPrice).toBeInTheDocument()
-
-    const productDiscount = screen.getByText('50%')
-    expect(productDiscount).toBeInTheDocument()
-  })
-
   describe('Mobile', () => {
     beforeEach(() => {
       // Force mobile media query
       useIsDesktop.mockReturnValue(false)
+    })
+
+    // Renders header content with logo and cart icon
+    it('should render header content with logo and cart icon', () => {
+      render(<App />)
+
+      const logo = screen.getByLabelText('sneakers')
+      expect(logo).toBeInTheDocument()
+
+      const cartIcon = screen.getByLabelText('Cart')
+      expect(cartIcon).toBeInTheDocument()
+    })
+
+    // Shows product details including name, description, price, and discount
+    it('should show product details including name, description, price, and discount', () => {
+      render(<App />)
+
+      const productName = screen.getByText('Fall Limited Edition Sneakers')
+      expect(productName).toBeInTheDocument()
+
+      const productDescription = screen.getByText(/These low-profile sneakers/)
+      expect(productDescription).toBeInTheDocument()
+
+      const productPrice = screen.getByText('$125.00')
+      expect(productPrice).toBeInTheDocument()
+
+      const productDiscount = screen.getByText('50%')
+      expect(productDiscount).toBeInTheDocument()
     })
 
     describe('App - Mobile Product Carousel', () => {
