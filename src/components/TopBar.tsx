@@ -13,7 +13,7 @@ import TopBarCart from './TopBarCart'
 export function MobileTopBar() {
   return (
     <div
-      id="top-bar"
+      id="top-bar" // ID needed for TopBarCart to correctly position cart icon
       className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5"
     >
       <div className="flex flex-row items-baseline gap-4">
@@ -41,7 +41,7 @@ export function MobileTopBar() {
 export function DesktopTopBar() {
   return (
     <div
-      id="top-bar"
+      id="top-bar" // ID needed for TopBarCart to correctly position cart icon
       className="flex w-full flex-row justify-between border-b-[1px] border-b-[#E4E9F2] px-4 py-8"
     >
       {/* Left hand side of TopBar */}
