@@ -1,8 +1,9 @@
 // With help by CodiumAI
 import App from '@/App'
+import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useIsDesktop } from '__mocks__/useMediaQuery'
+import { type MockedFunction } from 'vitest'
 
 describe('App', () => {
   test('confirm that the testing software is behaving', () => {
@@ -12,7 +13,9 @@ describe('App', () => {
   describe('Mobile', () => {
     beforeEach(() => {
       // Force mobile media query
-      useIsDesktop.mockReturnValue(false)
+      ;(useIsDesktop as MockedFunction<typeof useIsDesktop>).mockReturnValue(
+        false
+      )
     })
 
     // Renders header content with logo and cart icon
