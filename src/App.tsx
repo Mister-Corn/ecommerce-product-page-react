@@ -15,15 +15,11 @@ function App() {
     (state) => state.addFallSneakersToCart
   )
 
-  return isDesktop ? (
+  return (
     <div className="w-full bg-white">
-      <div className="container mx-auto">
-        <DesktopTopBar />
+      <div className="w-full md:container md:mx-auto">
+        {isDesktop ? <DesktopTopBar /> : <MobileTopBar />}
       </div>
-    </div>
-  ) : (
-    <>
-      <MobileTopBar />
 
       <main>
         <section id="product-display--mobile" className="relative">
@@ -81,7 +77,7 @@ function App() {
           </MobileCartDialog>
         </section>
       </main>
-    </>
+    </div>
   )
 }
 
