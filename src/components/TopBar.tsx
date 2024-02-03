@@ -4,15 +4,15 @@ import logo from '@/assets/svgs/logo.svg'
 import TopBarCart from './TopBarCart'
 
 /**
- * Renders the mobile header component.
+ * Renders the mobile top bar component.
  *
- * This component displays the mobile header, including the menu icon, logo,
+ * This component displays the mobile top bar, including the menu icon, logo,
  * cart button, and user avatar. The cart button shows the quantity of items
  * in the cart.
  */
 export function MobileTopBar() {
   return (
-    <header
+    <div
       id="top-bar"
       className="sticky left-0 top-0 z-50 flex flex-row items-baseline justify-between bg-white px-6 pb-7 pt-5"
     >
@@ -34,7 +34,7 @@ export function MobileTopBar() {
         {/* Avatar/Your Account */}
         <img src={avatar} alt="Your account" className="h-6 w-6" />
       </div>
-    </header>
+    </div>
   )
 }
 
