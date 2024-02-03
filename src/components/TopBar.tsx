@@ -1,15 +1,8 @@
-import IconCart from '@/assets/components/IconCart'
 import avatar from '@/assets/image-avatar.png'
 import logo from '@/assets/svgs/logo.svg'
-import { useAppState } from '@/data/globalState'
-import MobileCartDialog from './MobileCartDialog'
 import TopBarCart from './TopBarCart'
 
 export function TopBar() {
-  const quantityInCart = useAppState(
-    (state) => state.cartContents?.quantity ?? 0
-  )
-
   return (
     <div
       id="top-bar"
