@@ -7,6 +7,7 @@ import MobileProductCarousel from './components/MobileProductCarousel'
 import { DesktopTopBar, MobileTopBar } from './components/TopBar'
 import { useAppState } from './data/globalState'
 import { useIsDesktop } from './hooks/useMediaQuery'
+import { DesktopProductGallery } from './components/ProductGallery'
 
 function App() {
   const isDesktop = useIsDesktop()
@@ -21,17 +22,20 @@ function App() {
         {isDesktop ? <DesktopTopBar /> : <MobileTopBar />}
       </div>
 
-      <main>
-        <section id="product-display--mobile" className="relative">
-          <MobileProductCarousel />
+      <main className="flex flex-col md:flex-row md:gap-16 md:p-24 lg:gap-32">
+        <section
+          id="product-display--mobile"
+          className="relative w-full md:basis-1/2"
+        >
+          {isDesktop ? <DesktopProductGallery /> : <MobileProductCarousel />}
         </section>
 
-        <section className="p-6">
+        <section className="p-6 md:basis-1/2">
           <p className="mb-5 text-xs font-bold tracking-[0.125em] text-sunshine-fg">
             SNEAKER COMPANY
           </p>
 
-          <h1 className="mb-4 text-3xl font-bold text-black-darker">
+          <h1 className="mb-4 text-3xl font-bold text-black-darker md:text-5xl">
             Fall Limited Edition Sneakers
           </h1>
 
@@ -41,7 +45,7 @@ function App() {
             the weather can offer.
           </p>
 
-          <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center justify-between md:flex-col md:items-start md:gap-2">
             <div className="flex flex-row items-center gap-4">
               <span className="inline-block text-[28px] font-bold text-black-darker">
                 $125.00
