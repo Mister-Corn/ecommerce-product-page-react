@@ -1,7 +1,7 @@
 import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
-import MobileCartControls from './components/MobileCartControls'
+import CartControls from './components/CartControls'
 import MobileCartDialog from './components/MobileCartDialog'
 import MobileProductCarousel from './components/MobileProductCarousel'
 import { DesktopTopBar, MobileTopBar } from './components/TopBar'
@@ -67,7 +67,7 @@ function App() {
               </span>
             </div>
 
-            <MobileCartControls />
+            <CartControls />
 
             <MobileCartDialog>
               <button
