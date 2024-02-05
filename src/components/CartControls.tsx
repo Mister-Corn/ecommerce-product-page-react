@@ -1,13 +1,35 @@
 import iconMinus from '@/assets/svgs/icon-minus.svg'
 import iconPlus from '@/assets/svgs/icon-plus.svg'
 import { useAppState } from '@/data/globalState'
+import { cn } from '@/utils'
 
-function MobileCartControls() {
+type CartControlsProps = {
+  /**
+   * Additional classes to be applied to the component. Applied to the div
+   * enclosing the control UI elements.
+   */
+  className?: string
+}
+
+/**
+ * CartControls displays a quantity selector with increment/decrement
+ * buttons to control the quantity in the shopping cart.
+ *
+ * It uses the global app state to track quantity and dispatch
+ * actions to adjust it.
+ *
+ */
+function CartControls({ className }: CartControlsProps) {
   const quantity = useAppState((state) => state.orderControls.quantity)
   const adjustQuantity = useAppState((state) => state.adjustQuantity)
 
   return (
-    <div className="mb-4 mt-6 flex w-full flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5">
+    <div
+      className={cn(
+        'flex flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5',
+        className
+      )}
+    >
       <button
         aria-label="Decrement quantity"
         onClick={() => adjustQuantity('decrement')}
@@ -29,4 +51,4 @@ function MobileCartControls() {
   )
 }
 
-export default MobileCartControls
+export default CartControls
