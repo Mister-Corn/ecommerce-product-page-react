@@ -5,13 +5,20 @@ import { cn } from '@/utils'
 
 type CartControlsProps = {
   /**
-   * Additional classes to be applied to the component.
-   *
-   * @note Applied to the div enclosing the control UI elements.
+   * Additional classes to be applied to the component. Applied to the div
+   * enclosing the control UI elements.
    */
   className?: string
 }
 
+/**
+ * CartControls displays a quantity selector with increment/decrement
+ * buttons to control the quantity in the shopping cart.
+ *
+ * It uses the global app state to track quantity and dispatch
+ * actions to adjust it.
+ *
+ */
 function CartControls({ className }: CartControlsProps) {
   const quantity = useAppState((state) => state.orderControls.quantity)
   const adjustQuantity = useAppState((state) => state.adjustQuantity)
