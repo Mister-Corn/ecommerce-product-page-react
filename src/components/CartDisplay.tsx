@@ -4,7 +4,7 @@ import { cn } from '@/utils'
 import { convertToDecimalPriceUSD } from '@/utils/prices'
 import { type ReactNode } from 'react'
 
-export type MobileCartDisplayProps = {
+export type CartDisplayProps = {
   cartContents?: { productId: ProductId; quantity: number }
   className?: string
   clearCart: () => void
@@ -21,11 +21,7 @@ export type MobileCartDisplayProps = {
  * purposes. Applied on the outer `div` element.
  * @returns The rendered mobile cart display component.
  */
-function MobileCartDisplay({
-  cartContents,
-  clearCart,
-  className,
-}: MobileCartDisplayProps) {
+function CartDisplay({ cartContents, clearCart, className }: CartDisplayProps) {
   const CartTemplate = ({ children }: { children: ReactNode }) => (
     <div className={cn('h-full w-full p-2', className)}>
       <div className="flex flex-col rounded-[10px] bg-white shadow-2xl">
@@ -95,4 +91,4 @@ function MobileCartDisplay({
   )
 }
 
-export default MobileCartDisplay
+export default CartDisplay
