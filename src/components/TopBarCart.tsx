@@ -1,6 +1,6 @@
 import IconCart from '@/assets/components/IconCart'
 import { useAppState } from '@/data/globalState'
-import MobileCartDialog from './MobileCartDialog'
+import CartDialog from './CartDialog'
 
 /**
  * Renders a cart icon with the quantity of items in the cart displayed as a badge.
@@ -15,7 +15,7 @@ function TopBarCart({ className }: { className?: string }) {
   )
 
   return (
-    <MobileCartDialog>
+    <CartDialog>
       <button aria-label="Cart" className="relative">
         {quantityInCart > 0 && (
           <span
@@ -28,7 +28,7 @@ function TopBarCart({ className }: { className?: string }) {
 
         <IconCart fill="#69707D" className={className} />
       </button>
-    </MobileCartDialog>
+    </CartDialog>
   )
 }
 

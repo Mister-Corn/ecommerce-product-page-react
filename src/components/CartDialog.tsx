@@ -9,14 +9,14 @@ export type MobileCartDialogProps = {
 }
 
 /**
- * Renders a mobile cart dialog that displays the cart contents.
- * @note The mobile cart renders below the `#top-bar` element.
+ * Renders a cart dialog that displays the cart contents.
+ * @note The cart renders below the `#top-bar` element.
  *
  * @param props.children - The children to render as the dialog trigger (e.g.
  * "Cart" button).
- * @returns The rendered mobile cart dialog.
+ * @returns The rendered cart dialog.
  */
-function MobileCartDialog({ children }: MobileCartDialogProps) {
+function CartDialog({ children }: MobileCartDialogProps) {
   const cartContents = useAppState((state) => state.cartContents)
   const clearCart = useAppState((state) => state.clearCart)
 
@@ -49,4 +49,4 @@ function MobileCartDialog({ children }: MobileCartDialogProps) {
   )
 }
 
-export default MobileCartDialog
+export default CartDialog
