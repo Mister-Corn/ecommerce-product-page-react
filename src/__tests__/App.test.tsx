@@ -89,7 +89,7 @@ describe('App', () => {
       })
 
       // Cart dialog is displayed at the bottom of the screen
-      it('should display cart dialog below the header element when clicking the cart icon', async () => {
+      it('should display cart dialog below the #top-bar element when clicking the cart icon', async () => {
         const getCartDialog = () => screen.queryByRole('dialog')
 
         render(<App />)
@@ -102,7 +102,9 @@ describe('App', () => {
         const cartDialog = getCartDialog()
         expect(cartDialog).toBeInTheDocument()
 
-        const container = document.querySelector('header')
+        const container = document.querySelector(
+          '#top-bar'
+        ) as HTMLElement | null
         const containerHeight = container?.offsetHeight ?? 0
         expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
       })

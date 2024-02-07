@@ -2,7 +2,7 @@ import '@fontsource-variable/kumbh-sans'
 import './App.css'
 import IconCart from './assets/components/IconCart'
 import CartControls from './components/CartControls'
-import MobileCartDialog from './components/MobileCartDialog'
+import CartDialog from './components/CartDialog'
 import MobileProductCarousel from './components/MobileProductCarousel'
 import { DesktopTopBar, MobileTopBar } from './components/TopBar'
 import { useAppState } from './data/globalState'
@@ -70,7 +70,7 @@ function App() {
             <div className="mt-6 grid gap-4 lg:grid-cols-12 lg:items-center">
               <CartControls className="w-full lg:col-span-5" />
 
-              <MobileCartDialog>
+              <CartDialog>
                 <button
                   onClick={addFallSneakerToCart}
                   className="flex w-full flex-row items-center justify-center gap-4 rounded-[10px] bg-sunshine-fg py-5 font-bold text-white shadow-xl shadow-sunshine-fg/20 lg:col-span-7 lg:shadow-none"
@@ -78,7 +78,7 @@ function App() {
                   <IconCart fill="white" />
                   Add to cart
                 </button>
-              </MobileCartDialog>
+              </CartDialog>
             </div>
           </section>
         </main>
