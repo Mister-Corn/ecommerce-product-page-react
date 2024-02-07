@@ -28,6 +28,8 @@ describe('App', () => {
       const cartIcon = screen.getByLabelText('Cart')
       expect(cartIcon).toBeInTheDocument()
     })
+
+    describe('App - Cart Dialog', cartDialogTests)
   })
 
   describe('Mobile', () => {
@@ -79,51 +81,7 @@ describe('App', () => {
       })
     })
 
-    describe('App - Mobile Cart Dialog', () => {
-      // Cart dialog is not displayed when cart icon is not clicked
-      it('should not display cart dialog when cart icon is not clicked', () => {
-        render(<App />)
-
-        const cartDialog = screen.queryByRole('dialog')
-        expect(cartDialog).not.toBeInTheDocument()
-      })
-
-      // Cart dialog is displayed at the bottom of the screen
-      it('should display cart dialog below the #top-bar element when clicking the cart icon', async () => {
-        const getCartDialog = () => screen.queryByRole('dialog')
-
-        render(<App />)
-
-        expect(getCartDialog()).not.toBeInTheDocument()
-
-        const cartIcon = screen.getByRole('button', { name: 'Cart' })
-        await waitFor(() => userEvent.click(cartIcon))
-
-        const cartDialog = getCartDialog()
-        expect(cartDialog).toBeInTheDocument()
-
-        const container = document.querySelector(
-          '#top-bar'
-        ) as HTMLElement | null
-        const containerHeight = container?.offsetHeight ?? 0
-        expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
-      })
-
-      it('should display cart dialog when clicking the "Add to Cart" button"', async () => {
-        const getCartDialog = () => screen.queryByRole('dialog')
-
-        render(<App />)
-
-        expect(getCartDialog()).not.toBeInTheDocument()
-
-        const addToCartButton = screen.getByRole('button', {
-          name: /add to cart/i,
-        })
-        await userEvent.click(addToCartButton)
-
-        expect(getCartDialog()).toBeInTheDocument()
-      })
-    })
+    describe('App - Cart Dialog', cartDialogTests)
 
     describe('App - Order/Cart Controls', () => {
       it('should show "0" as the current quantity', async () => {
@@ -317,3 +275,47 @@ describe('App', () => {
     })
   })
 })
+
+function cartDialogTests() {
+  // Cart dialog is not displayed when cart icon is not clicked
+  it('should not display cart dialog when cart icon is not clicked', () => {
+    render(<App />)
+
+    const cartDialog = screen.queryByRole('dialog')
+    expect(cartDialog).not.toBeInTheDocument()
+  })
+
+  // Cart dialog is displayed at the bottom of the screen
+  it('should display cart dialog below the #top-bar element when clicking the cart icon', async () => {
+    const getCartDialog = () => screen.queryByRole('dialog')
+
+    render(<App />)
+
+    expect(getCartDialog()).not.toBeInTheDocument()
+
+    const cartIcon = screen.getByRole('button', { name: 'Cart' })
+    await waitFor(() => userEvent.click(cartIcon))
+
+    const cartDialog = getCartDialog()
+    expect(cartDialog).toBeInTheDocument()
+
+    const container = document.querySelector('#top-bar') as HTMLElement | null
+    const containerHeight = container?.offsetHeight ?? 0
+    expect(cartDialog).toHaveStyle(`top: ${containerHeight}px`)
+  })
+
+  it('should display cart dialog when clicking the "Add to Cart" button"', async () => {
+    const getCartDialog = () => screen.queryByRole('dialog')
+
+    render(<App />)
+
+    expect(getCartDialog()).not.toBeInTheDocument()
+
+    const addToCartButton = screen.getByRole('button', {
+      name: /add to cart/i,
+    })
+    await userEvent.click(addToCartButton)
+
+    expect(getCartDialog()).toBeInTheDocument()
+  })
+}
