@@ -66,7 +66,11 @@ export function DesktopTopBar() {
         <TopBarCart />
 
         {/* Avatar/Your Account */}
-        <img src={avatar} alt="Your account" className="h-12 w-12" />
+        <img
+          src={avatar}
+          alt="Your account"
+          className="h-12 w-12 rounded-full border-2 border-transparent hover:cursor-pointer hover:border-sunshine-fg"
+        />
       </div>
     </div>
   )
