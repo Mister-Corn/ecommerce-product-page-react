@@ -50,21 +50,11 @@ export function DesktopTopBar() {
         <img src={logo} alt="logo" aria-label="sneakers" className="" />
 
         <ul className="flex flex-row gap-8 text-black-lighter">
-          <li>
-            <a href="/">Collections</a>
-          </li>
-          <li>
-            <a href="/">Men</a>
-          </li>
-          <li>
-            <a href="/">Women</a>
-          </li>
-          <li>
-            <a href="/">About</a>
-          </li>
-          <li>
-            <a href="/">Contact</a>
-          </li>
+          {['Collections', 'Men', 'Women', 'About', 'Contact'].map((label) => (
+            <li key={label}>
+              <a href="/">{label}</a>
+            </li>
+          ))}
         </ul>
       </nav>
 
