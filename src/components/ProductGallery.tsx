@@ -59,6 +59,7 @@ export function DesktopProductGallery() {
             key={i}
           >
             <img
+              role="thumbnail"
               src={thumbSrc}
               alt={alt}
               className={cn(
