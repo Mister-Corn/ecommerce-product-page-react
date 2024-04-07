@@ -52,7 +52,7 @@ function CartControls({ className }: CartControlsProps) {
         type="button"
         aria-label="Increment quantity"
         onClick={() => adjustQuantity('increment')}
-        className="relative h-full flex-grow pr-6 text-sunshine-fg"
+        className="relative h-full flex-grow text-sunshine-fg"
       >
         <img
           src={iconPlus}
