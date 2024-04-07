@@ -1,11 +1,13 @@
-import productImg1 from '@/assets/products/image-product-1.jpg'
-import productImg2 from '@/assets/products/image-product-2.jpg'
-import productImg3 from '@/assets/products/image-product-3.jpg'
-import productImg4 from '@/assets/products/image-product-4.jpg'
 import product1Thumb from '@/assets/products/image-product-1-thumbnail.jpg'
+import productImg1 from '@/assets/products/image-product-1.jpg'
 import product2Thumb from '@/assets/products/image-product-2-thumbnail.jpg'
+import productImg2 from '@/assets/products/image-product-2.jpg'
 import product3Thumb from '@/assets/products/image-product-3-thumbnail.jpg'
+import productImg3 from '@/assets/products/image-product-3.jpg'
 import product4Thumb from '@/assets/products/image-product-4-thumbnail.jpg'
+import productImg4 from '@/assets/products/image-product-4.jpg'
+import { cn } from '@/utils'
+import { useState } from 'react'
 
 /**
  * Renders a desktop product gallery component with a large main image and thumbnail previews.
@@ -14,6 +16,8 @@ import product4Thumb from '@/assets/products/image-product-4-thumbnail.jpg'
  * - Images require a source, thumbnail source, and alt text.
  */
 export function DesktopProductGallery() {
+  const [selectedImg, setSelectedImg] = useState(0)
+
   const productImgs = [
     {
       src: productImg1,
@@ -40,19 +44,33 @@ export function DesktopProductGallery() {
   return (
     <section className="w-full">
       <img
-        src={productImgs[0].src}
-        alt={productImgs[0].alt}
+        src={productImgs[selectedImg].src}
+        alt={productImgs[selectedImg].alt}
         className="aspect-square w-full rounded-2xl"
       />
 
       <div className="mt-8 flex w-full flex-row items-center justify-between gap-8">
         {productImgs.map(({ thumbSrc, alt }, i) => (
-          <img
-            src={thumbSrc}
-            alt={alt}
-            className="aspect-square min-w-0 flex-1 rounded-[10px]"
+          <button
+            onClick={() => setSelectedImg(i)}
+            className={cn('rounded-[10px] border-2 border-transparent', {
+              'border-sunshine-fg': i === selectedImg,
+            })}
             key={i}
-          />
+          >
+            <img
+              role="thumbnail"
+              src={thumbSrc}
+              alt={alt}
+              className={cn(
+                'aspect-square min-w-0 flex-1 rounded-[10px]',
+                {
+                  'rounded-[8px] opacity-50': i === selectedImg,
+                },
+                'hover:opacity-50'
+              )}
+            />
+          </button>
         ))}
       </div>
     </section>

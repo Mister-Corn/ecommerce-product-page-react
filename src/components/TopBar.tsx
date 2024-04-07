@@ -42,29 +42,22 @@ export function DesktopTopBar() {
   return (
     <div
       id="top-bar" // ID needed for TopBarCart to correctly position cart icon
-      className="flex w-full flex-row justify-between border-b-[1px] border-b-[#E4E9F2] px-4 py-8"
+      className="flex w-full flex-row justify-between border-b-[1px] border-b-[#E4E9F2] px-4"
     >
       {/* Left hand side of TopBar */}
       <nav className="flex items-center gap-14">
         {/* Logo */}
         <img src={logo} alt="logo" aria-label="sneakers" className="" />
 
-        <ul className="flex flex-row gap-8 text-black-lighter">
-          <li>
-            <a href="/">Collections</a>
-          </li>
-          <li>
-            <a href="/">Men</a>
-          </li>
-          <li>
-            <a href="/">Women</a>
-          </li>
-          <li>
-            <a href="/">About</a>
-          </li>
-          <li>
-            <a href="/">Contact</a>
-          </li>
+        <ul className="flex h-full flex-row gap-8 text-black-lighter">
+          {['Collections', 'Men', 'Women', 'About', 'Contact'].map((label) => (
+            <li
+              key={label}
+              className="h-full border-b-4 border-sunshine-fg border-transparent pb-9 pt-10 hover:border-sunshine-fg"
+            >
+              <a href="/">{label}</a>
+            </li>
+          ))}
         </ul>
       </nav>
 
@@ -73,7 +66,11 @@ export function DesktopTopBar() {
         <TopBarCart />
 
         {/* Avatar/Your Account */}
-        <img src={avatar} alt="Your account" className="h-12 w-12" />
+        <img
+          src={avatar}
+          alt="Your account"
+          className="h-12 w-12 rounded-full border-2 border-transparent hover:cursor-pointer hover:border-sunshine-fg"
+        />
       </div>
     </div>
   )

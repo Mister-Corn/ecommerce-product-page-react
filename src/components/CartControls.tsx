@@ -26,26 +26,39 @@ function CartControls({ className }: CartControlsProps) {
   return (
     <div
       className={cn(
-        'flex flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD] py-5',
+        'flex h-full min-h-14 flex-row items-center justify-between rounded-[10px] bg-[#F6F8FD]',
         className
       )}
     >
       <button
+        type="button"
         aria-label="Decrement quantity"
         onClick={() => adjustQuantity('decrement')}
-        className="pl-6 text-sunshine-fg"
+        className="relative h-full flex-grow text-sunshine-fg"
       >
-        <img src={iconMinus} alt="-" />
+        <img
+          src={iconMinus}
+          alt="-"
+          className="absolute left-6 top-1/2 -translate-y-1/2"
+        />
       </button>
-      <span className="font-bold" aria-label="Current quantity to add to cart">
+      <span
+        className="w-min flex-shrink-0 font-bold"
+        aria-label="Current quantity to add to cart"
+      >
         {quantity}
       </span>
       <button
+        type="button"
         aria-label="Increment quantity"
         onClick={() => adjustQuantity('increment')}
-        className="pr-6 text-sunshine-fg"
+        className="relative h-full flex-grow pr-6 text-sunshine-fg"
       >
-        <img src={iconPlus} alt="+" />
+        <img
+          src={iconPlus}
+          alt="+"
+          className="absolute right-6 top-1/2 -translate-y-1/2"
+        />
       </button>
     </div>
   )
