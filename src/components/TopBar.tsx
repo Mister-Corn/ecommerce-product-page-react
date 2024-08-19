@@ -1,6 +1,6 @@
 import avatar from '@/assets/image-avatar.png'
-import mobileMenuIcon from '@/assets/svgs/icon-menu.svg'
 import logo from '@/assets/svgs/logo.svg'
+import MobileMenuDialog from './MobileMenuDialog'
 import TopBarCart from './TopBarCart'
 
 /**
@@ -18,12 +18,7 @@ export function MobileTopBar() {
     >
       <div className="flex flex-row items-baseline gap-4">
         {/* Mobile menu button */}
-        <img
-          src={mobileMenuIcon}
-          alt="Menu"
-          aria-label="Mobile Menu"
-          className="h-4 w-4"
-        />
+        <MobileMenuDialog />
         {/* Logo */}
         <img src={logo} alt="logo" aria-label="sneakers" />
       </div>
